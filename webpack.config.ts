@@ -1,35 +1,21 @@
-import HTMLWebpackPlugin from 'html-webpack-plugin' // HTML plugin
-import path from 'path' // Dynamic path unlike from different OS
+import path from 'path'
 import webpack from 'webpack' // To access build-in plugins
+import { buildWebpackConfig } from './config/build/buildWebpackConfig'
+import { BuildPaths } from './config/build/types/config'
 
-const config: webpack.Configuration = {
-	mode: 'development', // mode 'production' or 'development'
-	entry: path.resolve(__dirname, 'src', 'index.ts'), // Initial path to the Project
-	output: {
-		filename: '[name].[contenthash].js', // Default: 'main.CONTENT_HASH.js'
-		path: path.resolve(__dirname, 'build'), // Dist: 'build'
-		clean: true // Cleaning from previous files
-	},
-	plugins: [
-		new webpack.ProgressPlugin(), // Visualize build progress
-		new HTMLWebpackPlugin({
-			template: path.resolve(__dirname, 'public', 'index.html')
-		}) // For building html file from public folder
-	],
-	module: {
-		rules: [
-			// Configuring loaders (png, jpeg, gif, scss, sass etc.)
-			{
-				test: /\.tsx?$/, // Processing .ts, .tsx files
-				use: 'ts-loader',
-				exclude: /node_modules/ // Excluding
-			}
-		]
-	},
-	resolve: {
-		// Importing files without writing .tsx, .ts, .js
-		extensions: ['.tsx', '.ts', '.js']
-	}
+const paths: BuildPaths = {
+	entry: path.resolve(__dirname, 'src', 'index.ts'),
+	build: path.resolve(__dirname, 'build'),
+	html: path.resolve(__dirname, 'public', 'index.html')
 }
+
+const mode = 'development'
+const isDev = mode === 'development'
+
+const config: webpack.Configuration = buildWebpackConfig({
+	mode: mode,
+	paths: paths,
+	isDev
+})
 
 export default config
