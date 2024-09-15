@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		// default
+		"outDir": "./dist/", // Build dist ( it isn't required, because we build project by using webpack)
+		"noImplicitAny": true, // type any is not allowed
+		"module": "ES6", //
+		"target": "ES5", // For supporting most browsers
+		"jsx": "react", // like return <div></div>
+		"allowJs": true,
+		"moduleResolution": "node",
+		// more familiar imports
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true
+		// others
+	},
+	"ts-node": {
+		"compilerOptions": {
+			"module": "CommonJS"
+		}
+	}
+}
