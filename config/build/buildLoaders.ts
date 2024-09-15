@@ -1,29 +1,55 @@
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { RuleSetRule } from 'webpack'
+import { BuildOptions } from './types/config'
 
-export function buildLoaders(): RuleSetRule[] {
+export function buildLoaders(options: BuildOptions): RuleSetRule[] {
 	const cssLoader = {
 		test: /\.s[ac]ss$/i,
-		use: [
-			// Order is important!
-			// Creates `style` nodes from JS strings
-			'style-loader',
-			// Translates css into commonJS
-			'css-loader',
-			// Compile sass to css
-			'sass-loader'
+		oneOf: [
+			// This will handle CSS Modules for files ending in .module.scss
+			{
+				test: /\.module\.s[ac]ss$/i,
+				use: [
+					options.isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+					{
+						loader: 'css-loader',
+						options: {
+							modules: {
+								auto: (resPath: string) => resPath.includes('.module.'),
+								localIdentName: options.isDev
+									? '[path][name]__[local]--[hash:base64:5]'
+									: '[hash:base64:8]',
+								namedExport: false
+							}
+
+							// modules: {
+							// 	localIdentName: options.isDev
+							// 		? '[path][name]__[local]'
+							// 		: '[hash:base64]',
+							// 	namedExport: false,
+							// 	exportLocalsConvention: 'as-is'
+							// }
+						}
+					},
+					'sass-loader'
+				]
+			},
+			// This will handle regular SCSS files
+			{
+				use: [
+					options.isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+					'css-loader',
+					'sass-loader'
+				]
+			}
 		]
 	}
 
-	// If you are not using typescript - babel-loader is required
 	const typescriptLoader = {
 		test: /\.tsx?$/, // Processing .ts, .tsx files
 		use: 'ts-loader',
-		exclude: /node_modules/ // Excluding
+		exclude: /node_modules/ // Exclude node_modules
 	}
 
-	return [
-		// Configuring loaders (png, jpeg, gif, scss, sass etc.)
-		typescriptLoader,
-		cssLoader
-	]
+	return [typescriptLoader, cssLoader]
 }
