@@ -5,7 +5,7 @@
 		"noImplicitAny": true, // type any is not allowed
 		"module": "ES6", //
 		"target": "ES5", // For supporting most browsers
-		"jsx": "react", // like return <div></div>
+		"jsx": "react-jsx", // like return <div></div>
 		"allowJs": true,
 		"moduleResolution": "node",
 		// more familiar imports
@@ -17,7 +17,7 @@
 		"compilerOptions": {
 			"module": "CommonJS"
 		}
-	},
+	}
 	// Absolute imports
 	// "baseUrl": "."
 }
