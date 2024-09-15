@@ -3,7 +3,7 @@
 		// default
 		"outDir": "./dist/", // Build dist ( it isn't required, because we build project by using webpack)
 		"noImplicitAny": true, // type any is not allowed
-		"module": "ES6", //
+		"module": "ES2022", //
 		"target": "ES5", // For supporting most browsers
 		"jsx": "react-jsx", // like return <div></div>
 		"allowJs": true,
