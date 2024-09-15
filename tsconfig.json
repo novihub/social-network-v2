@@ -17,5 +17,7 @@
 		"compilerOptions": {
 			"module": "CommonJS"
 		}
-	}
+	},
+	// Absolute imports
+	"baseUrl": "."
 }
