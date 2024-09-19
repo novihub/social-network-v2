@@ -10,14 +10,17 @@
 		"moduleResolution": "node",
 		// more familiar imports
 		"esModuleInterop": true,
-		"allowSyntheticDefaultImports": true
+		"allowSyntheticDefaultImports": true,
 		// others
+		"baseUrl": ".",
+		"paths": {
+			"*": ["./src/*"]
+		}
 	},
 	"ts-node": {
 		"compilerOptions": {
 			"module": "CommonJS"
 		}
-	}
-	// Absolute imports
-	// "baseUrl": "./"
+	},
+
 }
