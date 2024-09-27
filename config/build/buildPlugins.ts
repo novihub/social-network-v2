@@ -3,7 +3,10 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import webpack, { WebpackPluginInstance } from 'webpack'
 import { BuildOptions } from './types/config'
 
-export function buildPlugins({ paths, isDev }: BuildOptions): WebpackPluginInstance[] {
+export function buildPlugins({
+	paths,
+	isDev
+}: BuildOptions): WebpackPluginInstance[] {
 	return [
 		new webpack.ProgressPlugin(), // Visualize build progress
 		new HtmlWebpackPlugin({
@@ -15,6 +18,7 @@ export function buildPlugins({ paths, isDev }: BuildOptions): WebpackPluginInsta
 		}),
 		new webpack.DefinePlugin({
 			__IS_DEV__: JSON.stringify(isDev)
-		})
+		}),
+		new webpack.HotModuleReplacementPlugin()
 	]
 }
