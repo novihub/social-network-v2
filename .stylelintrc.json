@@ -2,6 +2,8 @@
 	"extends": "stylelint-config-standard",
 	"rules": {
 		"selector-class-pattern": null,
-		"import-notation": "string"
+		"import-notation": "string",
+		"keyframes-name-pattern": null,
+		"value-keyword-case": null
 	}
 }
