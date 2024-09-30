@@ -1,5 +1,9 @@
 {
 	"Тестовый перевод": "Test translation",
 	"Перевод": "Translate",
-	"Язык": "English"
+	"Язык": "English",
+	"Переключить": "Toggle",
+	"Главная": "Home",
+	"О нас": "About",
+	"Загрузка...": "...loading"
 }
