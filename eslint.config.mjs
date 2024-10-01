@@ -22,5 +22,15 @@ export default [
 			'no-unused-vars': 'warn',
 			'i18next/no-literal-string': ['error', { markupOnly: true }]
 		}
+	},
+	{
+		overrides: [
+			{
+				files: ['**/src/**/*.test.{js,mjs,cjs,ts,jsx,tsx}'],
+				rules: {
+					'i18next/no-literal-string': 'off'
+				}
+			}
+		]
 	}
 ]
