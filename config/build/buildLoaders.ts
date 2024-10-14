@@ -1,6 +1,7 @@
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { RuleSetRule } from 'webpack'
+import { buildCssLoader } from './loaders/buildCssLoader'
 import { BuildOptions } from './types/config'
+
 
 export function buildLoaders(options: BuildOptions): RuleSetRule[] {
 	const babelLoader = {
@@ -34,47 +35,7 @@ export function buildLoaders(options: BuildOptions): RuleSetRule[] {
 		]
 	}
 
-	const cssLoader = {
-		test: /\.s[ac]ss$/i,
-		oneOf: [
-			// This will handle CSS Modules for files ending in .module.scss
-			{
-				test: /\.module\.s[ac]ss$/i,
-				use: [
-					options.isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-					{
-						loader: 'css-loader',
-						options: {
-							modules: {
-								auto: (resPath: string) => resPath.includes('.module.'),
-								localIdentName: options.isDev
-									? '[path][name]__[local]--[hash:base64:5]'
-									: '[hash:base64:8]',
-								namedExport: false
-							}
-
-							// modules: {
-							// 	localIdentName: options.isDev
-							// 		? '[path][name]__[local]'
-							// 		: '[hash:base64]',
-							// 	namedExport: false,
-							// 	exportLocalsConvention: 'as-is'
-							// }
-						}
-					},
-					'sass-loader'
-				]
-			},
-			// This will handle regular SCSS files
-			{
-				use: [
-					options.isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-					'css-loader',
-					'sass-loader'
-				]
-			}
-		]
-	}
+	const cssLoader = buildCssLoader(options.isDev)
 
 	const typescriptLoader = {
 		test: /\.tsx?$/, // Processing .ts, .tsx files
