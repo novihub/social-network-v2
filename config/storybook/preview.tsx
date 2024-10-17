@@ -3,13 +3,7 @@ import React from 'react'
 import '../../src/app/styles/index.scss'
 
 const preview: Preview = {
-	decorators: [
-		Story => (
-			<div>
-				<Story />
-			</div>
-		)
-	],
+	decorators: [Story => <Story />],
 	parameters: {
 		controls: {
 			matchers: {

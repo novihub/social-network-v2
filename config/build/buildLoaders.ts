@@ -2,7 +2,6 @@ import { RuleSetRule } from 'webpack'
 import { buildCssLoader } from './loaders/buildCssLoader'
 import { BuildOptions } from './types/config'
 
-
 export function buildLoaders(options: BuildOptions): RuleSetRule[] {
 	const babelLoader = {
 		test: /\.(js|jsx|tsx)?$/,

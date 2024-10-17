@@ -39,8 +39,7 @@ export const Light: Story = {
 			</div>
 		)
 	],
-	args: {
-	}
+	args: {}
 }
 
 export const Dark: Story = {
